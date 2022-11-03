@@ -39,9 +39,7 @@ const PropertyListingPreviewList = () => {
 
   const listingPreviews = listings.map((properties) => (
     <Grid item xs={2} sm={4} md={4}>
-      <Link to={`/properties/${properties.id}`} key={properties.id}>
-        <PropertyListingPreview data={properties} />
-      </Link>
+      <PropertyListingPreview data={properties} />
     </Grid>
   ));
 

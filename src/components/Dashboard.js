@@ -5,10 +5,17 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { BACKEND_URL } from "../constants.js";
 // ----- imports from MUI -----
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import TextField from "@mui/material/TextField";
 
 export default function Dashboard() {
   const [properties, setProperties] = useState([]);
@@ -40,6 +47,7 @@ export default function Dashboard() {
     }
   }, [user]);
 
+  console.log(properties);
   // useEffect(() => {
   //   axios.get(`${BACKEND_URL}/properties`).then((response) => {
   //     setProperties(response.data);
@@ -48,24 +56,25 @@ export default function Dashboard() {
   // }, []);
 
   return (
-    <Box>
+    <Box sx={{ display: "flex", height: "60vh" }}>
       <Typography
         variant="h5"
         sx={{
-          flexGrow: 1,
+          position: "absolute",
           fontFamily: "Roboto",
           fontWeight: 600,
-          display: "flex",
-          pt: 5,
+          p: 5,
+          left: 250,
+          top: 10,
         }}
       >
         Dashboard
       </Typography>
       <ImageList
         sx={{
-          width: "80vw",
-          height: "60vh",
-          pt: 10,
+          width: "60vw",
+          pt: 20,
+          left: 250,
         }}
         cols={3}
       >
@@ -79,7 +88,7 @@ export default function Dashboard() {
             />
             <ImageListItemBar
               title={prop.home_name}
-              subtitle={<span>by: {prop.owner_id}</span>}
+              subtitle={<span>by: {prop.owner.name}</span>}
               position="below"
               sx={{ background: "#FFFFFF" }}
             />

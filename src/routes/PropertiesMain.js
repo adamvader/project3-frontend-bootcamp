@@ -4,16 +4,20 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
+import Container from "@mui/material/Container";
 // import { Form } from "react-router-dom";
 
 import PropertyListingPreviewList from "../components/PropertyListingPreviewList";
 
 export default function PropertiesMain() {
   return (
-    <Box>
-      <Box sx={{ flexGrow: 1, pt: "13%", width: "70vw" }}>
+    <Container
+      className="overflow-auto"
+      sx={{ pt: "13%", height: "90vh", width: "100vw" }}
+    >
+      
         <PropertyListingPreviewList />
-      </Box>
+      
       <Fab
         variant="extended"
         color="primary"
@@ -30,6 +34,6 @@ export default function PropertiesMain() {
         <AddIcon sx={{ mr: 1 }} />
         Add New Listing
       </Fab>
-    </Box>
+    </Container>
   );
 }

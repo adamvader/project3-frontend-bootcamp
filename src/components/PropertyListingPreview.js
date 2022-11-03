@@ -14,7 +14,7 @@ const PropertyListingPreview = (props) => {
   console.log(props.data.id);
 
   return (
-    <Card sx={{ maxWidth: 345, height: 300 }}>
+    <Card sx={{ maxWidth: 345, height: 350 }}>
       <Link to={`/properties/${props.data.id}`} key={props.data.id}>
         <CardMedia
           component="img"

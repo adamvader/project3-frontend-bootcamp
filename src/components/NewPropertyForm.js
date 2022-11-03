@@ -153,7 +153,7 @@ const NewPropertyForm = () => {
   return (
     <Box
       className="overflow-auto"
-      sx={{ maxHeight: "100vh", width: "100vw", pt: "10%"}}
+      sx={{ maxHeight: "100vh", width: "100vw", pt: "10%" }}
     >
       <Form onSubmit={handleSubmit}>
         <Form.Group className="input-group mt-3 mb-3">
@@ -170,17 +170,17 @@ const NewPropertyForm = () => {
             onChange={handleChange}
             placeholder="Small cozy log cabin"
           />
-          <Form.Group className="input-group mt-3 mb-3">
-            <Form.Label class="input-group-text" id="inputGroup-sizing-default">
-              Image
-            </Form.Label>
-            <Form.Control
-              type="file"
-              name="price"
-              value={imageUpload.imageInputValue}
-              onChange={handleImageUpload}
-            />
-          </Form.Group>
+        </Form.Group>
+        <Form.Group className="input-group mt-3 mb-3">
+          <Form.Label class="input-group-text" id="inputGroup-sizing-default">
+            Image
+          </Form.Label>
+          <Form.Control
+            type="file"
+            name="price"
+            value={imageUpload.imageInputValue}
+            onChange={handleImageUpload}
+          />
         </Form.Group>
         <Form.Group className="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
@@ -208,8 +208,7 @@ const NewPropertyForm = () => {
             onChange={handleChange}
             placeholder="No. of max occupants allowed"
           />
-        </Form.Group>
-        <Form.Group className="input-group mt-3 mb-3 form-inline">
+
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
             Total Bedrooms
           </Form.Label>

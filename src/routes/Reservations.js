@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import ReservationPreview from "../components/ReservationPreview";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import { useAuth0 } from "@auth0/auth0-react";

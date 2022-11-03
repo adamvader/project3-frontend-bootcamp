@@ -101,7 +101,6 @@ const PropertyListing = (props) => {
 
   return (
     <Box>
-      <Link to="/">Home</Link>
       <Card>
         <Card.Body>
           <img

@@ -11,7 +11,7 @@ import PropertyListingPreviewList from "../components/PropertyListingPreviewList
 export default function PropertiesMain() {
   return (
     <Box>
-      <Box sx={{ flexGrow: 1, pt: "10%", width: "80vw" }}>
+      <Box sx={{ flexGrow: 1, pt: "13%", width: "70vw" }}>
         <PropertyListingPreviewList />
       </Box>
       <Fab

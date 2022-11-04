@@ -6,15 +6,18 @@ import Button from "react-bootstrap/Button";
 import Box from "@mui/material/Box";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Popover from "@mui/material/Popover";
+import EditPropertyForm from "./EditPropertyForm.js";
 
 import { BACKEND_URL } from "../constants.js";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {  icon } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 
-const PropertyListing = (props) => {
+const PropertyListing = () => {
   const [propertyName, setpropertyName] = useState();
   const [property, setProperty] = useState({});
+  const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,7 +50,6 @@ const PropertyListing = (props) => {
       );
     }
   }
-
   const propertyFacilities = [];
   if (property.has_tv === true) {
     propertyFacilities.push(
@@ -82,6 +84,19 @@ const PropertyListing = (props) => {
     );
   }
 
+  // Functions for Edit button Popover
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
+  // Function for Delete Button
   const handleDelete = async (id, home_name) => {
     await axios.delete(`${BACKEND_URL}/properties/${id}`);
     console.log(`${home_name} successfully deleted.`);
@@ -125,10 +140,26 @@ const PropertyListing = (props) => {
           <h3>What this place offers</h3>
           {propertyFacilities}
         </Card.Body>
-        <Button variant="primary">
+        <Button variant="primary" onClick={handleClick}>
           <EditIcon sx={{ mr: 1 }} />
           Edit
         </Button>
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
+          transformOrigin={{
+            vertical: "bottom",
+            horizontal: "center",
+          }}
+        >
+          <EditPropertyForm props={property} />
+        </Popover>
         <Button
           variant="danger"
           onClick={() => handleDelete(property.id, property.home_name)}

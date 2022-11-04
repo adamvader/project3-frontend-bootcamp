@@ -3,36 +3,21 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import PropertyListingPreview from "./PropertyListingPreview";
 import { BACKEND_URL } from "../constants.js";
 import { useAuth0 } from "@auth0/auth0-react";
+import AllPropertyListingPreview from "./AllPropertyListingPreview.js";
 
-const PropertyListingPreviewList = () => {
+const AllPropertyListingPreviewList = () => {
   const [listings, setListings] = useState([]);
   const { getAccessTokenSilently, user } = useAuth0();
 
   useEffect(() => {
     if (user) {
       const getProperties = async () => {
-        const accessToken = await getAccessTokenSilently({
-          audience: "https://stayhere/api",
-          scope: "read:current_user",
+        axios.get(`${BACKEND_URL}/properties/all/all`, {}).then((response) => {
+          setListings(response.data);
         });
-        console.log(user);
-        axios
-          .get(`${BACKEND_URL}/properties`, {
-            params: {
-              ownerEmail: user.email,
-            },
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          })
-          .then((response) => {
-            setListings(response.data);
-          });
       };
-
       getProperties();
     }
   }, [user]);
@@ -45,11 +30,11 @@ const PropertyListingPreviewList = () => {
     >
       {listings.map((properties) => (
         <Grid item key={properties.id} xs={2} sm={4} md={4}>
-          <PropertyListingPreview data={properties} />
+          <AllPropertyListingPreview data={properties}/>
         </Grid>
       ))}
     </Grid>
   );
 };
 
-export default PropertyListingPreviewList;
+export default AllPropertyListingPreviewList;

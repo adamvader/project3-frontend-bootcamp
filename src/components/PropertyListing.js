@@ -12,7 +12,7 @@ import EditPropertyForm from "./EditPropertyForm.js";
 import { BACKEND_URL } from "../constants.js";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  icon } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
+import { icon } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 
 const PropertyListing = () => {
   const [propertyName, setpropertyName] = useState();
@@ -31,37 +31,43 @@ const PropertyListing = () => {
     }
     // Only run this effect on change to listingId
   }, [propertyName]);
-  
+
   // Update listing ID in state if needed to trigger data retrieval
   const params = useParams();
-  // console.log(params)
   if (propertyName !== params.propertyName) {
     setpropertyName(params.propertyName);
   }
-  console.log(params);
   console.log(property);
 
   // Store a new JSX element for each property in listing details
-  const propertyDetails = [];
-  if (property) {
-    for (const key in property) {
-      propertyDetails.push(
-        <Card.Text key={key}>{`${key}: ${property[key]}`}</Card.Text>
-      );
-    }
-  }
+  // const propertyDetails = [];
+  // if (property) {
+  //   for (const key in property) {
+  //     propertyDetails.push(
+  //       <Card.Text key={key.id}>{`${key}: ${property[key]}`}</Card.Text>
+  //     );
+  //   }
+  // }
+
   const propertyFacilities = [];
   if (property.has_tv === true) {
     propertyFacilities.push(
-      <p >
-        <FontAwesomeIcon icon={icon({ name: "tv", style: "solid" })} /> TV
+      <p>
+        <FontAwesomeIcon
+          key={property.id}
+          icon={icon({ name: "tv", style: "solid" })}
+        />{" "}
+        TV
       </p>
     );
   }
   if (property.has_kitchen === true) {
     propertyFacilities.push(
       <p>
-        <FontAwesomeIcon icon={icon({ name: "kitchen-set", style: "solid" })} />{" "}
+        <FontAwesomeIcon
+          key={property.id}
+          icon={icon({ name: "kitchen-set", style: "solid" })}
+        />{" "}
         Kitchen
       </p>
     );
@@ -70,6 +76,7 @@ const PropertyListing = () => {
     propertyFacilities.push(
       <p>
         <FontAwesomeIcon
+          key={property.id}
           icon={icon({ name: "temperature-arrow-down", style: "solid" })}
         />{" "}
         Air-con
@@ -79,7 +86,11 @@ const PropertyListing = () => {
   if (property.has_internet === true) {
     propertyFacilities.push(
       <p>
-        <FontAwesomeIcon icon={icon({ name: "wifi", style: "solid" })} /> Wifi
+        <FontAwesomeIcon
+          key={property.id}
+          icon={icon({ name: "wifi", style: "solid" })}
+        />{" "}
+        Wifi
       </p>
     );
   }
@@ -104,8 +115,8 @@ const PropertyListing = () => {
   };
 
   return (
-    <Box>
-      <Card>
+    property && (
+      <Card className="overflow-auto" sx={{ maxHeight: "100vh", pt: "10%" }}>
         <Card.Body>
           <img
             src={`${property.image_url}`}
@@ -115,11 +126,9 @@ const PropertyListing = () => {
             loading="lazy"
           />
           <h1>{property.home_name}</h1>
+          <p>Host: {property?.user?.name}</p>
           <p>
-            {/* Host: {property.owner.name} */}
-          </p>
-          <p>
-            {property.total_occupancy} guests · {property.total_bedrooms}
+            {property.total_occupancy} guests · {property.total_bedrooms}{" "}
             bedrooms · {property.total_bathrooms} bath · {property.price} yen
             per night
           </p>
@@ -168,8 +177,7 @@ const PropertyListing = () => {
           Delete
         </Button>
       </Card>
-      <br />
-    </Box>
+    )
   );
 };
 

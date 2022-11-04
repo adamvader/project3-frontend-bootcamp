@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 // ----- imports from Mui -----
 import Card from "@mui/material/Card";
@@ -7,11 +7,8 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
-// import axios from "axios";
 
 const PropertyListingPreview = (props) => {
-  console.log(props);
-  console.log(props.data.id);
 
   return (
     <Card sx={{ maxWidth: 345, height: 350 }}>

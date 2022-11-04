@@ -294,7 +294,7 @@ const NewPropertyForm = () => {
         </Form>
         <Form.Group className="input-group mt-3 mb-3">
           <Form.Label class="input-group-text" id="inputGroup-sizing-default">
-            Price ($)
+            Price (Yen)
           </Form.Label>
           <Form.Control
             type="text"

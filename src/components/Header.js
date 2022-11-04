@@ -38,7 +38,7 @@ const HeaderBar = () => {
         <Toolbar disableGutters>
           <IconButton
             component={Link}
-            to="/PropertiesMain"
+            to="/"
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
           >
             <img src={Logo} alt="logo" />

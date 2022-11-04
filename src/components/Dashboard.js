@@ -12,40 +12,38 @@ import ImageListItemBar from "@mui/material/ImageListItemBar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import TextField from "@mui/material/TextField";
+import AllPropertyListingPreviewList from "./AllPropertyListingPreviewList.js";
 
 export default function Dashboard() {
   const [properties, setProperties] = useState([]);
   const { getAccessTokenSilently, user } = useAuth0();
 
-  useEffect(() => {
-    if (user) {
-      const getProperties = async () => {
-        const accessToken = await getAccessTokenSilently({
-          audience: "https://stayhere/api",
-          scope: "read:current_user",
-        });
-        console.log(user);
-        axios
-          .get(`${BACKEND_URL}/properties`, {
-            params: {
-              ownerEmail: user.email,
-            },
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          })
-          .then((response) => {
-            setProperties(response.data);
-          });
-      };
+  // useEffect(() => {
+  //   if (user) {
+  //     const getProperties = async () => {
+  //       const accessToken = await getAccessTokenSilently({
+  //         audience: "https://stayhere/api",
+  //         scope: "read:current_user",
+  //       });
+  //       console.log(user);
+  //       axios
+  //         .get(`${BACKEND_URL}/properties`, {
+  //           params: {
+  //             ownerEmail: user.email,
+  //           },
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //           },
+  //         })
+  //         .then((response) => {
+  //           setProperties(response.data);
+  //         });
+  //     };
 
-      getProperties();
-    }
-  }, [user]);
+  //     getProperties();
+  //   }
+  // }, [user]);
 
   console.log(properties);
   // useEffect(() => {
@@ -56,8 +54,12 @@ export default function Dashboard() {
   // }, []);
 
   return (
-    <Box sx={{ display: "flex", height: "60vh" }}>
-      <Typography
+    <Box
+      className="overflow-auto"
+      sx={{ pt: "13%", height: "90vh", width: "100vw" }}
+    >
+      <AllPropertyListingPreviewList />
+      {/* <Typography
         variant="h5"
         sx={{
           position: "absolute",
@@ -69,8 +71,8 @@ export default function Dashboard() {
         }}
       >
         Dashboard
-      </Typography>
-      <ImageList
+      </Typography> */}
+      {/* <ImageList
         sx={{
           width: "60vw",
           pt: 20,
@@ -94,7 +96,7 @@ export default function Dashboard() {
             />
           </ImageListItem>
         ))}
-      </ImageList>
+      </ImageList> */}
     </Box>
   );
 }

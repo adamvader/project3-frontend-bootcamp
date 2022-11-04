@@ -20,6 +20,7 @@ import PropertyListing from "./components/PropertyListing";
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { Auth0Provider, withAuthenticationRequired } from "@auth0/auth0-react";
+import Dashboard from "./components/Dashboard";
 
 const ProtectedApp = withAuthenticationRequired(App);
 
@@ -27,7 +28,7 @@ const Auth0ProviderWithRedirectCallback = ({ children, ...props }) => {
   const navigate = useNavigate();
 
   const onRedirectCallback = () => {
-    navigate("/PropertiesMain");
+    navigate("/");
   };
 
   return (
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage />,
     children: [
+      {
+        index: "/",
+        element: <Dashboard/>,
+      },
       {
         path: "PropertiesMain",
         element: <PropertiesMain />,

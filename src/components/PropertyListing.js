@@ -12,12 +12,7 @@ import EditPropertyForm from "./EditPropertyForm.js";
 import { BACKEND_URL } from "../constants.js";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  solid,
-  regular,
-  brands,
-  icon,
-} from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
+import {  icon } from "@fortawesome/fontawesome-svg-core/import.macro"; // <-- import styles to be used
 
 const PropertyListing = () => {
   const [propertyName, setpropertyName] = useState();
@@ -36,13 +31,15 @@ const PropertyListing = () => {
     }
     // Only run this effect on change to listingId
   }, [propertyName]);
-
+  
   // Update listing ID in state if needed to trigger data retrieval
   const params = useParams();
   // console.log(params)
   if (propertyName !== params.propertyName) {
     setpropertyName(params.propertyName);
   }
+  console.log(params);
+  console.log(property);
 
   // Store a new JSX element for each property in listing details
   const propertyDetails = [];
@@ -56,7 +53,7 @@ const PropertyListing = () => {
   const propertyFacilities = [];
   if (property.has_tv === true) {
     propertyFacilities.push(
-      <p>
+      <p >
         <FontAwesomeIcon icon={icon({ name: "tv", style: "solid" })} /> TV
       </p>
     );
@@ -106,13 +103,6 @@ const PropertyListing = () => {
     navigate("/PropertiesMain");
   };
 
-  // const handleClick = () => {
-  //   axios.put(`${BACKEND_URL}/properties/${propertyName}`).then((response) => {
-  //     console.log(response.data);
-  //     setProperty(response.data);
-  //   });
-  // };
-
   return (
     <Box>
       <Card>
@@ -126,8 +116,12 @@ const PropertyListing = () => {
           />
           <h1>{property.home_name}</h1>
           <p>
-            {property.total_occupancy} guests · {property.total_bedrooms}{" "}
-            bedrooms · {property.total_bathrooms} bath
+            {/* Host: {property.owner.name} */}
+          </p>
+          <p>
+            {property.total_occupancy} guests · {property.total_bedrooms}
+            bedrooms · {property.total_bathrooms} bath · {property.price} yen
+            per night
           </p>
           <hr
             style={{
@@ -145,17 +139,6 @@ const PropertyListing = () => {
           />
           <h3>What this place offers</h3>
           {propertyFacilities}
-          {/* <hr
-            style={{
-              background: "#f0f0f0",
-              float: "center",
-              // width: "700px",
-              // color: "lime",
-              // borderColor: "lime",
-              // height: "3px",
-            }}
-          /> */}
-          {/* {propertyDetails} */}
         </Card.Body>
         <Button variant="primary" onClick={handleClick}>
           <EditIcon sx={{ mr: 1 }} />

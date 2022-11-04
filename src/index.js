@@ -16,6 +16,8 @@ import PropertiesMain from "./routes/PropertiesMain";
 import NewPropertyForm from "./components/NewPropertyForm";
 import PropertyListing from "./components/PropertyListing";
 
+// import ProfileForm from "./components/ProfileForm";
+
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { Auth0Provider, withAuthenticationRequired } from "@auth0/auth0-react";
 
@@ -63,6 +65,10 @@ const router = createBrowserRouter([
         path: "PropertiesListing/new",
         element: <NewPropertyForm />,
       },
+      // {
+      //   path: "ProfileForm",
+      //   element: <ProfileForm />,
+      // },
       {
         path: "Reservations",
         element: <Reservations />,

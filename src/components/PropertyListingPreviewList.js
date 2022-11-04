@@ -37,13 +37,6 @@ const PropertyListingPreviewList = () => {
     }
   }, [user]);
 
-  // useEffect(() => {
-  //   axios.get(`${BACKEND_URL}/properties`).then((response) => {
-  //     setListings(response.data);
-  //   });
-  //   // Only run this effect on component mount
-  // }, []);
-
   const listingPreviews = listings.map((properties) => (
     <Grid item xs={2} sm={4} md={4}>
       <PropertyListingPreview data={properties} />
